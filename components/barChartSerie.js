@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
+
 const BarChartSerie = (props) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={props.navigate}>
       <View style={styles.barBg}>
         <View style={[styles.bar, {backgroundColor: props.color, height: props.height}]}/>
       </View>
