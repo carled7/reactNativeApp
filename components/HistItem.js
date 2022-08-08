@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View} from 'react-native';
+import { MotiView } from 'moti';
 
 const HistItem = (props) => {
   return (
-    <View style={styles.container}>
+    <MotiView style={styles.container} from={{opacity: 0}} animate={{opacity: 1}}>
       <Text style={styles.txt}>{props.text}</Text>
-    </View>
+    </MotiView>
   );
 }
 

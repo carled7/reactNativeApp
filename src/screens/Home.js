@@ -5,10 +5,11 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Button } from 're
 import HistItem from '../../components/HistItem';
 import BarChartSerie from '../../components/barChartSerie';
 
+import { MotiText } from "moti";
 
 export const Home = ({ navigation }) => {
 
-  const [date, setDate] = useState(getDate());
+  const [date, setDate] = useState('getDate()');
 
   const [protein, setProtein] = useState(1);
   const [calories, setCalories] = useState(1);
@@ -17,7 +18,6 @@ export const Home = ({ navigation }) => {
   const [histItems, setHistItems] = useState([]);
 
   function initTracking() {
-
     setHistItems([...histItems, date]);
 
     setDate(`${getDate()}`);
@@ -26,11 +26,9 @@ export const Home = ({ navigation }) => {
     setCalories(1);
     setWater(1);
 
-
   }
 
   function getDate() {
-
     const date = new Date().toString().slice(4, 10);
 
     return date;
@@ -44,7 +42,6 @@ export const Home = ({ navigation }) => {
     navigation.navigate('UpdateWater');
   }
 
-
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -52,15 +49,15 @@ export const Home = ({ navigation }) => {
       <ScrollView style={styles.history} horizontal={true} >
         {
           histItems.map((item, index) => {
-            return(
-              <HistItem key={index} text={item}/>
+            return (
+              <HistItem key={index} text={item} />
             );
           })
         }
       </ScrollView>
       <View style={styles.activeTracking}>
         <View style={styles.header}>
-          <Text style={styles.activeDay}>{date}</Text>
+          <MotiText style={styles.activeDay} from={{ opacity: 0 }} animate={{ opacity: 1 }}>{date}</MotiText>
           <Text style={styles.status}>tracking</Text>
         </View>
         <View style={styles.chart}>
