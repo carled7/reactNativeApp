@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   txt:{
     fontSize: 12,
     fontWeight: 'bold',
-    maxWidth: 20,
+    maxWidth: 30,
     textAlign: 'center',
     marginTop: 10,
   }

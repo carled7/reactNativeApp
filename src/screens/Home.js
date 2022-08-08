@@ -8,22 +8,31 @@ import BarChartSerie from '../../components/barChartSerie';
 
 export const Home = ({ navigation }) => {
 
-  const [date, setDate] = useState('3 ago');
-  const [protein, setProtein] = useState(40);
-  const [calories, setCalories] = useState(60);
-  const [water, setWater] = useState(10);
+  const [date, setDate] = useState(getDate());
 
-  function initTracking(){
+  const [protein, setProtein] = useState(1);
+  const [calories, setCalories] = useState(1);
+  const [water, setWater] = useState(1);
+
+  const [histItems, setHistItems] = useState([]);
+
+  function initTracking() {
+
+    setHistItems([...histItems, date]);
+
     setDate(`${getDate()}`);
-    setProtein(0);
-    setCalories(0);
-    setWater(0);
+
+    setProtein(1);
+    setCalories(1);
+    setWater(1);
+
+
   }
 
-  function getDate(){
-    
-    const date = new Date().toString().slice(4,10);
-    
+  function getDate() {
+
+    const date = new Date().toString().slice(4, 10);
+
     return date;
   }
 
@@ -41,15 +50,13 @@ export const Home = ({ navigation }) => {
       <StatusBar style="auto" />
       <Text style={styles.h1}>Food Tracker</Text>
       <ScrollView style={styles.history} horizontal={true} >
-        <HistItem text={'25 jun'} />
-        <HistItem text={'27 jun'} />
-        <HistItem text={'30 jun'} />
-        <HistItem text={'25 jun'} />
-        <HistItem text={'27 jun'} />
-        <HistItem text={'30 jun'} />
-        <HistItem text={'25 jun'} />
-        <HistItem text={'27 jun'} />
-        <HistItem text={'30 jun'} />
+        {
+          histItems.map((item, index) => {
+            return(
+              <HistItem key={index} text={item}/>
+            );
+          })
+        }
       </ScrollView>
       <View style={styles.activeTracking}>
         <View style={styles.header}>
@@ -57,12 +64,12 @@ export const Home = ({ navigation }) => {
           <Text style={styles.status}>tracking</Text>
         </View>
         <View style={styles.chart}>
-          <BarChartSerie text={'protein'} color={'#10C285'} height={`${protein}%`} navigate={toUpdateFood}/>
+          <BarChartSerie text={'protein'} color={'#10C285'} height={`${protein}%`} navigate={toUpdateFood} />
           <BarChartSerie text={'calories'} color={'#F14570'} height={`${calories}%`} navigate={toUpdateFood} />
           <BarChartSerie text={'water'} color={'#0099DD'} height={`${water}%`} navigate={toUpdateWater} />
         </View>
       </View>
-      <TouchableOpacity style={styles.addBtn} onPress = {() => initTracking()}>
+      <TouchableOpacity style={styles.addBtn} onPress={() => initTracking()}>
         <Text style={styles.txtBtn}>new tracking</Text>
       </TouchableOpacity>
     </View>
