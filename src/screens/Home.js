@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Animated } from 'react-native';
 
 import HistItem from '../../components/HistItem';
 import BarChartSerie from '../../components/barChartSerie';
 
-import { MotiText } from "moti";
+import { MotiText, MotiView } from "moti";
 
 export const Home = ({ navigation }) => {
 
-  const [date, setDate] = useState('getDate()');
+  const [date, setDate] = useState(getDate());
 
   const [protein, setProtein] = useState(1);
   const [calories, setCalories] = useState(1);
@@ -17,15 +17,38 @@ export const Home = ({ navigation }) => {
 
   const [histItems, setHistItems] = useState([]);
 
+  const animatedProp = useRef(
+    new Animated.Value(1)
+  ).current;
+
+  const fadeOut = () => {
+
+    Animated.timing(animatedProp, {
+      toValue: 0,
+      duration: 150,
+      useNativeDriver: true,
+    }).start(() => fadeIn());
+
+  };
+  const fadeIn = () => {
+
+    Animated.timing(animatedProp, {
+      toValue: 1,
+      duration: 150,
+      useNativeDriver: true,
+    }).start();
+    
+  };
+
   function initTracking() {
     setHistItems([...histItems, date]);
-
+    console.log('initTrack');
     setDate(`${getDate()}`);
 
     setProtein(1);
     setCalories(1);
     setWater(1);
-
+    fadeOut();
   }
 
   function getDate() {
@@ -55,7 +78,16 @@ export const Home = ({ navigation }) => {
           })
         }
       </ScrollView>
-      <View style={styles.activeTracking}>
+      <Animated.View style={{
+        backgroundColor: '#FFF',
+        width: '90%',
+        borderRadius: 8,
+        marginHorizontal: 14,
+        paddingTop: 28,
+        paddingHorizontal: 26,
+        flex: 1,
+        opacity: animatedProp
+      }}>
         <View style={styles.header}>
           <MotiText style={styles.activeDay} from={{ opacity: 0 }} animate={{ opacity: 1 }}>{date}</MotiText>
           <Text style={styles.status}>tracking</Text>
@@ -65,7 +97,7 @@ export const Home = ({ navigation }) => {
           <BarChartSerie text={'calories'} color={'#F14570'} height={`${calories}%`} navigate={toUpdateFood} />
           <BarChartSerie text={'water'} color={'#0099DD'} height={`${water}%`} navigate={toUpdateWater} />
         </View>
-      </View>
+      </Animated.View>
       <TouchableOpacity style={styles.addBtn} onPress={() => initTracking()}>
         <Text style={styles.txtBtn}>new tracking</Text>
       </TouchableOpacity>
@@ -94,15 +126,16 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     maxHeight: 72,
   },
-  activeTracking: {
+  /*activeTracking: {
     backgroundColor: '#FFF',
     width: '90%',
     borderRadius: 8,
     marginHorizontal: 14,
     paddingTop: 28,
     paddingHorizontal: 26,
-    flex: 1
-  },
+    flex: 1,
+    opacity: {animatedProp}
+  },*/
   header: {
     justifyContent: 'space-between',
     flexDirection: 'row'
