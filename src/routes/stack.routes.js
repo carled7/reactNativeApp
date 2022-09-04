@@ -18,6 +18,7 @@ export const StackRoutes = () => {
             <Screen
                 name="UpdateFood"
                 component={UpdateFood}
+                options={{headerShown: false}}
             />
             <Screen
                 name="UpdateWater"

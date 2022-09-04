@@ -1,11 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Animated } from 'react-native';
 
 import HistItem from '../../components/HistItem';
 import BarChartSerie from '../../components/barChartSerie';
-
-import { MotiText, MotiView } from "moti";
+import { globalStyles } from "../styles/global";
 
 export const Home = ({ navigation }) => {
 
@@ -66,9 +65,9 @@ export const Home = ({ navigation }) => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={globalStyles.container}>
       <StatusBar style="auto" />
-      <Text style={styles.h1}>Food Tracker</Text>
+      <Text style={globalStyles.h1}>Food Tracker</Text>
       <ScrollView style={styles.history} horizontal={true} >
         {
           histItems.map((item, index) => {
@@ -78,18 +77,9 @@ export const Home = ({ navigation }) => {
           })
         }
       </ScrollView>
-      <Animated.View style={{
-        backgroundColor: '#FFF',
-        width: '90%',
-        borderRadius: 8,
-        marginHorizontal: 14,
-        paddingTop: 28,
-        paddingHorizontal: 26,
-        flex: 1,
-        opacity: animatedProp
-      }}>
+      <Animated.View style={[{opacity: animatedProp}, styles.activeTracking]}>
         <View style={styles.header}>
-          <MotiText style={styles.activeDay} from={{ opacity: 0 }} animate={{ opacity: 1 }}>{date}</MotiText>
+          <Text style={styles.activeDay} from={{ opacity: 0 }} animate={{ opacity: 1 }}>{date}</Text>
           <Text style={styles.status}>tracking</Text>
         </View>
         <View style={styles.chart}>
@@ -98,8 +88,8 @@ export const Home = ({ navigation }) => {
           <BarChartSerie text={'water'} color={'#0099DD'} height={`${water}%`} navigate={toUpdateWater} />
         </View>
       </Animated.View>
-      <TouchableOpacity style={styles.addBtn} onPress={() => initTracking()}>
-        <Text style={styles.txtBtn}>new tracking</Text>
+      <TouchableOpacity style={[globalStyles.btn, styles.addBtn]} onPress={() => initTracking()}>
+        <Text style={[globalStyles.btnText, styles.btnText]}>new tracking</Text>
       </TouchableOpacity>
     </View>
 
@@ -108,34 +98,21 @@ export const Home = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f0f0f0',
-    paddingTop: 52,
-    paddingBottom: 40,
-    paddingHorizontal: 21,
-
-  },
-  h1: {
-    color: '#2B3538',
-    fontWeight: 'bold',
-    fontSize: 24,
-  },
+  
   history: {
     paddingHorizontal: 6,
     marginVertical: 30,
     maxHeight: 72,
   },
-  /*activeTracking: {
+  activeTracking: {
     backgroundColor: '#FFF',
     width: '90%',
     borderRadius: 8,
     marginHorizontal: 14,
     paddingTop: 28,
     paddingHorizontal: 26,
-    flex: 1,
-    opacity: {animatedProp}
-  },*/
+    flex: 1
+  },
   header: {
     justifyContent: 'space-between',
     flexDirection: 'row'
@@ -153,17 +130,10 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   addBtn: {
-    width: '90%',
     backgroundColor: '#FFF',
-    marginHorizontal: 14,
     marginTop: 40,
-    borderRadius: 8,
-    paddingVertical: 20,
-
   },
-  txtBtn: {
-    alignSelf: 'center',
-    fontWeight: 'bold',
-    fontSize: 16
+  btnText: {
+    color: '#141414'
   }
 })
