@@ -68,7 +68,7 @@ export const Home = ({ navigation }) => {
     <View style={globalStyles.container}>
       <StatusBar style="auto" />
       <Text style={globalStyles.h1}>Food Tracker</Text>
-      <ScrollView style={styles.history} horizontal={true} >
+      <ScrollView style={styles.history} horizontal={true}>
         {
           histItems.map((item, index) => {
             return (
@@ -83,9 +83,9 @@ export const Home = ({ navigation }) => {
           <Text style={styles.status}>tracking</Text>
         </View>
         <View style={styles.chart}>
-          <BarChartSerie text={'protein'} color={'#10C285'} height={`${protein}%`} navigate={toUpdateFood} />
-          <BarChartSerie text={'calories'} color={'#F14570'} height={`${calories}%`} navigate={toUpdateFood} />
-          <BarChartSerie text={'water'} color={'#0099DD'} height={`${water}%`} navigate={toUpdateWater} />
+          <BarChartSerie text={'protein'} color={'#10C285'} height={`${protein}%`} navigate={toUpdateFood} icon={'meat'}/>
+          <BarChartSerie text={'calories'} color={'#F14570'} height={`${calories}%`} navigate={toUpdateFood} icon={'flame'}/>
+          <BarChartSerie text={'water'} color={'#0099DD'} height={`${water}%`} navigate={toUpdateWater} icon={'bottle'}/>
         </View>
       </Animated.View>
       <TouchableOpacity style={[globalStyles.btn, styles.addBtn]} onPress={() => initTracking()}>

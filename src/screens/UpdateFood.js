@@ -9,7 +9,7 @@ import { ScrollView } from "moti";
 
 export const UpdateFood = ({ navigation }) => {
 
-    const [modalVisible, setModalVisible] = useState(false);
+    const [modalVisible, setModalVisible] = useState(true);
     const [food, setFood] = useState("food");
 
     function toHome() {
@@ -47,13 +47,17 @@ export const UpdateFood = ({ navigation }) => {
                             })
                         }
                     </ScrollView>
-                    <TouchableOpacity onPress={() => setModalVisible(false)} style={[styles.closeBtn]}><Text style={[globalStyles.btnText]}>close</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => setModalVisible(false)} style={[styles.closeBtn]}><Text style={[globalStyles.btnText]}>next</Text></TouchableOpacity>
                 </View>
 
             </Modal>
 
             <Text style={globalStyles.h1}>Update</Text>
-
+            <View>
+                <Text>
+                    
+                </Text>
+            </View>
             <TouchableOpacity style={[globalStyles.btn, styles.foodBtn]} onPress={() => { setModalVisible(true)}}>
                 <Text style={[globalStyles.btnText]}>{food}</Text>
             </TouchableOpacity>
