@@ -30,6 +30,7 @@ export const globalStyles = StyleSheet.create({
         color: '#2B3538',
         fontWeight: 'bold',
         fontSize: 24,
-        marginBottom: 30
+        marginTop: 25,
+        marginBottom: 5
     }
 })

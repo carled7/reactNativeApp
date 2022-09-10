@@ -1,6 +1,4 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { SvgUri } from 'react-native-svg';
-import { FlatList } from 'react-native-web';
 import Bottle from '../src/assets/bottle.svg';
 import Flame from '../src/assets/flame.svg';
 import Meat from '../src/assets/meat.svg';
