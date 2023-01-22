@@ -94,19 +94,19 @@ export const Home = ({ navigation }) => {
           <View style={styles.statsContainer}>
             <Flame style={[styles.statsIcon, { color: '#f14570' }]} width={30} height={30} />
             <Text style={styles.statsTxt}>daily calories</Text>
-            <TextInput style={[globalStyles.btn, styles.txtInput]} placeholder='512kcal' />
+            <TextInput style={[globalStyles.txtInput, {textAlign: 'right'}]} placeholder='512kcal' />
           </View>
 
           <View style={styles.statsContainer}>
             <Meat style={[styles.statsIcon, { color: '#10c285' }]} width={30} height={30} />
             <Text style={styles.statsTxt}>daily protein</Text>
-            <TextInput style={[globalStyles.btn, styles.txtInput]} placeholder='150g' />
+            <TextInput style={[globalStyles.txtInput, {textAlign: 'right'}]} placeholder='150g' />
           </View>
 
           <View style={styles.statsContainer}>
             <Bottle style={[styles.statsIcon, { color: '#0099DD' }]} width={30} height={30} />
             <Text style={styles.statsTxt}>daily water</Text>
-            <TextInput style={[globalStyles.btn, styles.txtInput]} placeholder='3000ml' />
+            <TextInput style={[globalStyles.txtInput, {textAlign: 'right'}]} placeholder='3000ml' />
           </View>
 
           <Pressable style={[globalStyles.btn, styles.btnBg]}><Text style={[globalStyles.btnText, styles.btnText]}>edit food list</Text></Pressable>
@@ -232,16 +232,5 @@ const styles = StyleSheet.create({
   btnBg: {
     marginTop: 10,
     backgroundColor: '#f0f0f0'
-  },
-  txtInput: {
-    width: '83%',
-    marginLeft: 25,
-    textAlign: 'right',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    marginTop: 10,
-    backgroundColor: '#fff',
-    borderWidth: 2,
-    borderColor: '#f0f0f0'
   }
 })
